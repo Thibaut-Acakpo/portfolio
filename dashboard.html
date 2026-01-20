@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+        }
+
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .login-btn, .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .login-btn:hover, .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Dashboard */
+        .dashboard-container {
+            display: none;
+        }
+
+        .dashboard-container.active {
+            display: block;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .user-info p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            margin: 5px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .menu-item.active {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .page-header h1 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .page-header p {
+            color: #666;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+        }
+
+        .editor-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .editor-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .editor-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .save-btn, .add-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .add-btn {
+            background: #2196F3;
+            margin-bottom: 20px;
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .edit-btn {
+            background: #FF9800;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .items-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .item-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .item-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .success-alert {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-alert.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .messages-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .message-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .message-from {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .message-email {
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .message-date {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        .message-subject {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .message-text {
+            color: #555;
+            line-height: 1.6;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .status-non_lu {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .status-lu {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .status-repondu {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-reply {
+            background: #FF9800;
+            color: white;
+        }
+
+        .btn-mark-read {
+            background: #2196F3;
+            color: white;
+        }
+
+        .reply-form {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .reply-form.active {
+            display: block;
+        }
+
+        .reply-form textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            margin-bottom: 10px;
+        }
+
+        .btn-send {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-cancel {
+            background: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <a href="index.html" style="display: block; text-align: center; margin-bottom: 20px; color: #667eea; text-decoration: none; font-weight: bold;">← Retour au portfolio</a>
+            <h1>🔐 Connexion Admin</h1>
+            <div class="error-message" id="loginError"></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="login-btn">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard-container" id="dashboardPage">
+        <div class="sidebar">
+            <div class="logo">📊 Dashboard</div>
+            <div class="user-info">
+                <p><strong id="adminName">Admin</strong></p>
+                <p id="adminEmail"></p>
+            </div>
+            <a href="index.html" style="display: block; padding: 15px 20px; margin: 5px 0; border-radius: 10px; background: rgba(255,255,255,0.1); color: white; text-decoration: none; text-align: center;">
+                🏠 Retour au portfolio
+            </a>
+            <div class="menu-item active" data-page="messages">
+                📬 Messages
+            </div>
+            <div class="menu-item" data-page="portfolio">
+                ✏️ Infos Personnelles
+            </div>
+            <div class="menu-item" data-page="projets">
+                📂 Projets
+            </div>
+            <div class="menu-item" data-page="competences">
+                🎨 Compétences
+            </div>
+            <div class="menu-item" data-page="experiences">
+                💼 Expériences
+            </div>
+            <div class="menu-item" data-page="parametres">
+                ⚙️ Paramètres
+            </div>
+            <button class="logout-btn" onclick="logout()">🚪 Déconnexion</button>
+        </div>
+
+        <div class="main-content">
+            <!-- Messages Section -->
+            <div class="content-section active" id="messages-section">
+                <div class="page-header">
+                    <h1>📬 Gestion des Messages</h1>
+                    <p>Consultez et répondez aux messages de vos visiteurs</p>
+                </div>
+
+                <div class="stats" id="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalMessages">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="unreadMessages">0</div>
+                        <div class="stat-label">Non lus</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="readMessages">0</div>
+                        <div class="stat-label">Lus</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="respondedMessages">0</div>
+                        <div class="stat-label">Répondus</div>
+                    </div>
+                </div>
+
+                <div class="messages-grid" id="messagesGrid"></div>
+            </div>
+
+            <!-- Portfolio Info Section -->
+            <div class="content-section" id="portfolio-section">
+                <div class="page-header">
+                    <h1>✏️ Informations Personnelles</h1>
+                    <p>Mettez à jour vos informations personnelles</p>
+                </div>
+
+                <div class="success-alert" id="portfolioSuccess">✅ Modifications enregistrées!</div>
+
+                <div class="editor-grid">
+                    <div class="editor-card">
+                        <h2>Informations de contact</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nom complet</label>
+                                <input type="text" id="fullName">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="email">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                <input type="text" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label>Localisation</label>
+                                <input type="text" id="location">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Bio / Description</label>
+                            <textarea id="bio" rows="4"></textarea>
+                        </div>
+                        <button class="save-btn" onclick="savePersonalInfo()">💾 Enregistrer</button>
+                    </div>
+
+                    <div class="editor-card">
+                        <h2>Statistiques du portfolio</h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Projets réalisés</label>
+                                <input type="number" id="projectsCount">
+                            </div>
+                            <div class="form-group">
+                                <label>Clients satisfaits</label>
+                                <input type="number" id="clientsCount">
+                            </div>
+                            <div class="form-group">
+                                <label>Années d'expérience</label>
+                                <input type="number" id="experienceYears">
+                            </div>
+                        </div>
+                        <button class="save-btn" onclick="saveStats()">💾 Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projets Section -->
+            <div class="content-section" id="projets-section">
+                <div class="page-header">
+                    <h1>📂 Gestion des Projets</h1>
+                    <p>Ajoutez, modifiez ou supprimez vos projets</p>
+                </div>
+
+                <button class="add-btn" onclick="openProjectModal()">➕ Ajouter un projet</button>
+
+                <div class="items-list" id="projetsListe"></div>
+            </div>
+
+            <!-- Compétences Section -->
+            <div class="content-section" id="competences-section">
+                <div class="page-header">
+                    <h1>🎨 Gestion des Compétences</h1>
+                    <p>Ajoutez, modifiez ou supprimez vos compétences</p>
+                </div>
+
+                <button class="add-btn" onclick="openSkillModal()">➕ Ajouter une compétence</button>
+
+                <div class="items-list" id="competencesListe"></div>
+            </div>
+
+            <!-- Expériences Section -->
+            <div class="content-section" id="experiences-section">
+                <div class="page-header">
+                    <h1>💼 Gestion des Expériences</h1>
+                    <p>Ajoutez, modifiez ou supprimez vos expériences professionnelles</p>
+                </div>
+
+                <button class="add-btn" onclick="openExperienceModal()">➕ Ajouter une expérience</button>
+
+                <div class="items-list" id="experiencesListe"></div>
+            </div>
+
+            <!-- Paramètres Section -->
+            <div class="content-section" id="parametres-section">
+                <div class="page-header">
+                    <h1>⚙️ Paramètres</h1>
+                    <p>Gérez les paramètres de votre compte</p>
+                </div>
+
+                <div class="editor-card">
+                    <h2>Changer le mot de passe</h2>
+                    <form id="changePasswordForm">
+                        <div class="form-group">
+                            <label>Ancien mot de passe</label>
+                            <input type="password" id="oldPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nouveau mot de passe</label>
+                            <input type="password" id="newPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmer le nouveau mot de passe</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="save-btn">🔐 Changer le mot de passe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Projet -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="projectModalTitle">Ajouter un projet</h2>
+                <button class="modal-close" onclick="closeProjectModal()">×</button>
+            </div>
+            <form id="projectForm">
+                <input type="hidden" id="projectId">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" id="projectTitre" required>
+                </div>
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select id="projectCategorie" required>
+                        <option value="web">Web</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="design">Design</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Icône (emoji)</label>
+                    <input type="text" id="projectIcone" placeholder="🚀">
+                </div>
+                <div class="form-group">
+                    <label>Description courte</label>
+                    <textarea id="projectDescCourte" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Description détaillée</label>
+                    <textarea id="projectDescLongue" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tags (séparés par des virgules)</label>
+                    <input type="text" id="projectTags" placeholder="React, Node.js, MongoDB">
+                </div>
+                <div class="form-group">
+                    <label>Lien du projet</label>
+                    <input type="url" id="projectLien" placeholder="https://...">
+                </div>
+                <button type="submit" class="submit-btn">💾 Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Compétence -->
+    <div class="modal" id="skillModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="skillModalTitle">Ajouter une compétence</h2>
+                <button class="modal-close" onclick="closeSkillModal()">×</button>
+            </div>
+            <form id="skillForm">
+                <input type="hidden" id="skillId">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" id="skillNom" required>
+                </div>
+                <div class="form-group">
+                    <label>Icône (emoji)</label>
+                    <input type="text" id="skillIcone" placeholder="⚡">
+                </div>
+                <div class="form-group">
+                    <label>Niveau (%)</label>
+                    <input type="number" id="skillNiveau" min="0" max="100" value="50">
+                </div>
+                <button type="submit" class="submit-btn">💾 Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Expérience -->
+    <div class="modal" id="experienceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="experienceModalTitle">Ajouter une expérience</h2>
+                <button class="modal-close" onclick="closeExperienceModal()">×</button>
+            </div>
+            <form id="experienceForm">
+                <input type="hidden" id="experienceId">
+                <div class="form-group">
+                    <label>Période</label>
+                    <input type="text" id="experiencePeriode" placeholder="2023 - Présent" required>
+                </div>
+                <div class="form-group">
+                    <label>Poste</label>
+                    <input type="text" id="experiencePoste" required>
+                </div>
+                <div class="form-group">
+                    <label>Entreprise</label>
+                    <input type="text" id="experienceEntreprise" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="experienceDescription" rows="3"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">💾 Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let allMessages = [];
+        let adminData = null;
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorDiv = document.getElementById('loginError');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    adminData = data.admin;
+                    localStorage.setItem('adminAuth', JSON.stringify(data.admin));
+                    showDashboard();
+                } else {
+                    errorDiv.textContent = data.message;
+                    errorDiv.classList.add('show');
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Erreur de connexion au serveur';
+                errorDiv.classList.add('show');
+            }
+        });
+
+        function showDashboard() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('dashboardPage').classList.add('active');
+            document.getElementById('adminName').textContent = adminData.nom;
+            document.getElementById('adminEmail').textContent = adminData.email;
+            loadMessages();
+            loadPortfolioData();
+            loadProjets();
+            loadCompetences();
+            loadExperiences();
+        }
+
+        const savedAuth = localStorage.getItem('adminAuth');
+        if (savedAuth) {
+            adminData = JSON.parse(savedAuth);
+            showDashboard();
+        }
+
+        function logout() {
+            localStorage.removeItem('adminAuth');
+            location.reload();
+        }
+
+        // Menu Navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                const page = item.getAttribute('data-page');
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(page + '-section').classList.add('active');
+            });
+        });
+
+        // === MESSAGES ===
+        async function loadMessages() {
+            try {
+                const response = await fetch('http://localhost:3000/api/messages');
+                const data = await response.json();
+                if (data.success) {
+                    allMessages = data.messages;
+                    updateStats();
+                    displayMessages();
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('totalMessages').textContent = allMessages.length;
+            document.getElementById('unreadMessages').textContent = allMessages.filter(m => m.statut === 'non_lu').length;
+            document.getElementById('readMessages').textContent = allMessages.filter(m => m.statut === 'lu').length;
+            document.getElementById('respondedMessages').textContent = allMessages.filter(m => m.statut === 'repondu').length;
+        }
+
+        function displayMessages() {
+            const grid = document.getElementById('messagesGrid');
+            if (allMessages.length === 0) {
+                grid.innerHTML = '<p>Aucun message</p>';
+                return;
+            }
+
+            grid.innerHTML = allMessages.map(msg => `
+                <div class="message-card">
+                    <div class="message-header">
+                        <div>
+                            <div class="message-from">${msg.nom}</div>
+                            <div class="message-email">${msg.email}</div>
+                        </div>
+                        <div class="message-date">${new Date(msg.date_envoi).toLocaleDateString('fr-FR')}</div>
+                    </div>
+                    <div class="message-subject">📌 ${msg.sujet}</div>
+                    <div class="message-text">${msg.message}</div>
+                    <div>
+                        <span class="status-badge status-${msg.statut}">${getStatusLabel(msg.statut)}</span>
+                        ${msg.statut === 'non_lu' ? `<button class="action-btn btn-mark-read" onclick="updateStatus(${msg.id}, 'lu')">Marquer lu</button>` : ''}
+                        ${msg.statut !== 'repondu' ? `<button class="action-btn btn-reply" onclick="toggleReply(${msg.id})">✉️ Répondre</button>` : ''}
+                    </div>
+                    <div class="reply-form" id="reply-${msg.id}">
+                        <textarea id="replyText-${msg.id}" placeholder="Votre réponse..."></textarea>
+                        <button class="btn-send" onclick="sendReply(${msg.id})">Envoyer</button>
+                        <button class="btn-cancel" onclick="toggleReply(${msg.id})">Annuler</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getStatusLabel(statut) {
+            const labels = { 'non_lu': '🔴 Non lu', 'lu': '🔵 Lu', 'repondu': '✅ Répondu' };
+            return labels[statut] || statut;
+        }
+
+        function toggleReply(id) {
+            document.getElementById(`reply-${id}`).classList.toggle('active');
+        }
+
+        async function updateStatus(id, statut) {
+            try {
+                await fetch(`http://localhost:3000/api/messages/${id}/statut`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ statut })
+                });
+                loadMessages();
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        async function sendReply(id) {
+            const replyText = document.getElementById(`replyText-${id}`).value;
+            if (!replyText) {
+                alert('Veuillez écrire une réponse');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/messages/${id}/repondre`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reponse: replyText })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    alert('✅ Email envoyé!');
+                    loadMessages();
+                } else {
+                    alert('❌ Erreur: ' + data.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur serveur');
+            }
+        }
+
+        // === PORTFOLIO INFO ===
+        async function loadPortfolioData() {
+            try {
+                const infosRes = await fetch('http://localhost:3000/api/portfolio/infos');
+                const infosData = await infosRes.json();
+                if (infosData.success && infosData.data) {
+                    document.getElementById('fullName').value = infosData.data.nom_complet || '';
+                    document.getElementById('email').value = infosData.data.email || '';
+                    document.getElementById('phone').value = infosData.data.telephone || '';
+                    document.getElementById('location').value = infosData.data.localisation || '';
+                    document.getElementById('bio').value = infosData.data.bio || '';
+                }
+
+                const statsRes = await fetch('http://localhost:3000/api/portfolio/stats');
+                const statsData = await statsRes.json();
+                if (statsData.success && statsData.data) {
+                    document.getElementById('projectsCount').value = statsData.data.projets_realises || 0;
+                    document.getElementById('clientsCount').value = statsData.data.clients_satisfaits || 0;
+                    document.getElementById('experienceYears').value = statsData.data.annees_experience || 0;
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        async function savePersonalInfo() {
+            const data = {
+                nom_complet: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('phone').value,
+                localisation: document.getElementById('location').value,
+                bio: document.getElementById('bio').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/portfolio/infos', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    showSuccess('portfolioSuccess');
+                    alert('✅ Informations enregistrées!');
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        }
+
+        async function saveStats() {
+            const data = {
+                projets_realises: parseInt(document.getElementById('projectsCount').value),
+                clients_satisfaits: parseInt(document.getElementById('clientsCount').value),
+                annees_experience: parseInt(document.getElementById('experienceYears').value)
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/portfolio/stats', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    showSuccess('portfolioSuccess');
+                    alert('✅ Statistiques enregistrées!');
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        }
+
+        // === PROJETS ===
+        async function loadProjets() {
+            try {
+                const response = await fetch('http://localhost:3000/api/projets');
+                const data = await response.json();
+                if (data.success) {
+                    displayProjets(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        function displayProjets(projets) {
+            const liste = document.getElementById('projetsListe');
+            if (projets.length === 0) {
+                liste.innerHTML = '<p>Aucun projet</p>';
+                return;
+            }
+
+            liste.innerHTML = '';
+            projets.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-info">
+                        <h3>${p.icone} ${p.titre}</h3>
+                        <p>${p.categorie} - ${p.description_courte}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${p.id}">✏️ Modifier</button>
+                        <button class="delete-btn" onclick="deleteProject(${p.id})">🗑️ Supprimer</button>
+                    </div>
+                `;
+                
+                // Ajouter l'événement au bouton modifier
+                const editBtn = card.querySelector('.edit-btn');
+                editBtn.addEventListener('click', () => editProject(p));
+                
+                liste.appendChild(card);
+            });
+        }
+
+        function openProjectModal(project = null) {
+            document.getElementById('projectModal').classList.add('active');
+            if (project) {
+                document.getElementById('projectModalTitle').textContent = 'Modifier le projet';
+                document.getElementById('projectId').value = project.id;
+                document.getElementById('projectTitre').value = project.titre;
+                document.getElementById('projectCategorie').value = project.categorie;
+                document.getElementById('projectIcone').value = project.icone;
+                document.getElementById('projectDescCourte').value = project.description_courte;
+                document.getElementById('projectDescLongue').value = project.description_longue;
+                document.getElementById('projectTags').value = project.tags;
+                document.getElementById('projectLien').value = project.lien_projet;
+            } else {
+                document.getElementById('projectModalTitle').textContent = 'Ajouter un projet';
+                document.getElementById('projectForm').reset();
+                document.getElementById('projectId').value = '';
+            }
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.remove('active');
+        }
+
+        function editProject(project) {
+            openProjectModal(project);
+        }
+
+        document.getElementById('projectForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('projectId').value;
+            const data = {
+                titre: document.getElementById('projectTitre').value,
+                categorie: document.getElementById('projectCategorie').value,
+                icone: document.getElementById('projectIcone').value,
+                description_courte: document.getElementById('projectDescCourte').value,
+                description_longue: document.getElementById('projectDescLongue').value,
+                tags: document.getElementById('projectTags').value,
+                lien_projet: document.getElementById('projectLien').value
+            };
+
+            try {
+                const url = id ? `http://localhost:3000/api/projets/${id}` : 'http://localhost:3000/api/projets';
+                const method = id ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Projet enregistré!');
+                    closeProjectModal();
+                    loadProjets();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        });
+
+        async function deleteProject(id) {
+            if (!confirm('Voulez-vous vraiment supprimer ce projet ?')) return;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/projets/${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Projet supprimé!');
+                    loadProjets();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        }
+
+        // === COMPÉTENCES ===
+        async function loadCompetences() {
+            try {
+                const response = await fetch('http://localhost:3000/api/competences');
+                const data = await response.json();
+                if (data.success) {
+                    displayCompetences(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        function displayCompetences(competences) {
+            const liste = document.getElementById('competencesListe');
+            if (competences.length === 0) {
+                liste.innerHTML = '<p>Aucune compétence</p>';
+                return;
+            }
+
+            liste.innerHTML = '';
+            competences.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-info">
+                        <h3>${c.icone} ${c.nom}</h3>
+                        <p>Niveau: ${c.niveau}%</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${c.id}">✏️ Modifier</button>
+                        <button class="delete-btn" onclick="deleteSkill(${c.id})">🗑️ Supprimer</button>
+                    </div>
+                `;
+                
+                // Ajouter l'événement au bouton modifier
+                const editBtn = card.querySelector('.edit-btn');
+                editBtn.addEventListener('click', () => editSkill(c));
+                
+                liste.appendChild(card);
+            });
+        }
+
+        function openSkillModal(skill = null) {
+            document.getElementById('skillModal').classList.add('active');
+            if (skill) {
+                document.getElementById('skillModalTitle').textContent = 'Modifier la compétence';
+                document.getElementById('skillId').value = skill.id;
+                document.getElementById('skillNom').value = skill.nom;
+                document.getElementById('skillIcone').value = skill.icone;
+                document.getElementById('skillNiveau').value = skill.niveau;
+            } else {
+                document.getElementById('skillModalTitle').textContent = 'Ajouter une compétence';
+                document.getElementById('skillForm').reset();
+                document.getElementById('skillId').value = '';
+            }
+        }
+
+        function closeSkillModal() {
+            document.getElementById('skillModal').classList.remove('active');
+        }
+
+        function editSkill(skill) {
+            openSkillModal(skill);
+        }
+
+        document.getElementById('skillForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('skillId').value;
+            const data = {
+                nom: document.getElementById('skillNom').value,
+                icone: document.getElementById('skillIcone').value,
+                niveau: parseInt(document.getElementById('skillNiveau').value)
+            };
+
+            try {
+                const url = id ? `http://localhost:3000/api/competences/${id}` : 'http://localhost:3000/api/competences';
+                const method = id ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Compétence enregistrée!');
+                    closeSkillModal();
+                    loadCompetences();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        });
+
+        async function deleteSkill(id) {
+            if (!confirm('Voulez-vous vraiment supprimer cette compétence ?')) return;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/competences/${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Compétence supprimée!');
+                    loadCompetences();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        }
+
+        // === EXPÉRIENCES ===
+        async function loadExperiences() {
+            try {
+                const response = await fetch('http://localhost:3000/api/experiences');
+                const data = await response.json();
+                if (data.success) {
+                    displayExperiences(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
+        }
+
+        function displayExperiences(experiences) {
+            const liste = document.getElementById('experiencesListe');
+            if (experiences.length === 0) {
+                liste.innerHTML = '<p>Aucune expérience</p>';
+                return;
+            }
+
+            liste.innerHTML = '';
+            experiences.forEach(e => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.innerHTML = `
+                    <div class="item-info">
+                        <h3>${e.poste}</h3>
+                        <p>${e.entreprise} - ${e.periode}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${e.id}">✏️ Modifier</button>
+                        <button class="delete-btn" onclick="deleteExperience(${e.id})">🗑️ Supprimer</button>
+                    </div>
+                `;
+                
+                // Ajouter l'événement au bouton modifier
+                const editBtn = card.querySelector('.edit-btn');
+                editBtn.addEventListener('click', () => editExperience(e));
+                
+                liste.appendChild(card);
+            });
+        }
+
+        function openExperienceModal(experience = null) {
+            document.getElementById('experienceModal').classList.add('active');
+            if (experience) {
+                document.getElementById('experienceModalTitle').textContent = 'Modifier l\'expérience';
+                document.getElementById('experienceId').value = experience.id;
+                document.getElementById('experiencePeriode').value = experience.periode;
+                document.getElementById('experiencePoste').value = experience.poste;
+                document.getElementById('experienceEntreprise').value = experience.entreprise;
+                document.getElementById('experienceDescription').value = experience.description;
+            } else {
+                document.getElementById('experienceModalTitle').textContent = 'Ajouter une expérience';
+                document.getElementById('experienceForm').reset();
+                document.getElementById('experienceId').value = '';
+            }
+        }
+
+        function closeExperienceModal() {
+            document.getElementById('experienceModal').classList.remove('active');
+        }
+
+        function editExperience(experience) {
+            openExperienceModal(experience);
+        }
+
+        document.getElementById('experienceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('experienceId').value;
+            const data = {
+                periode: document.getElementById('experiencePeriode').value,
+                poste: document.getElementById('experiencePoste').value,
+                entreprise: document.getElementById('experienceEntreprise').value,
+                description: document.getElementById('experienceDescription').value
+            };
+
+            try {
+                const url = id ? `http://localhost:3000/api/experiences/${id}` : 'http://localhost:3000/api/experiences';
+                const method = id ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Expérience enregistrée!');
+                    closeExperienceModal();
+                    loadExperiences();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        });
+
+        async function deleteExperience(id) {
+            if (!confirm('Voulez-vous vraiment supprimer cette expérience ?')) return;
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/experiences/${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Expérience supprimée!');
+                    loadExperiences();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        }
+
+        // === PARAMÈTRES ===
+        document.getElementById('changePasswordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const oldPassword = document.getElementById('oldPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('❌ Les mots de passe ne correspondent pas');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/admin/change-password', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: adminData.email,
+                        oldPassword: oldPassword,
+                        newPassword: newPassword
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('✅ Mot de passe changé avec succès!');
+                    document.getElementById('changePasswordForm').reset();
+                } else {
+                    alert('❌ Erreur: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Erreur de connexion');
+            }
+        });
+
+        function showSuccess(id) {
+            const el = document.getElementById(id);
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
