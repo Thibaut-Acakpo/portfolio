@@ -12,14 +12,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configuration de l'email avec Brevo
 const transporter = nodemailer.createTransport({
-    host: 'smtp-relay.brevo.com',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-        user: '9f0f51001@smtp-brevo.com',
-        pass: 'VOTRE_CLE_SMTP_ICI'  // Remplacez par la clé complète visible en cliquant sur l'œil
+        user: 'acakpothibaut2@gmail.com',
+        pass: 'nmte lqhz mxig delx'  // Remplace par le nouveau mot de passe
     }
 });
 
@@ -86,31 +83,50 @@ app.post('/api/admin/login', (req, res) => {
 app.post('/api/contact', (req, res) => {
     const { nom, email, sujet, message } = req.body;
 
-    // Validation des données
     if (!nom || !email || !sujet || !message) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'Tous les champs sont obligatoires' 
+        return res.status(400).json({
+            success: false,
+            message: 'Tous les champs sont obligatoires'
         });
     }
 
-    // Insertion dans la base de données
-    const query = 'INSERT INTO messages (nom, email, sujet, message) VALUES (?, ?, ?, ?)';
-    
-    db.query(query, [nom, email, sujet, message], (err, result) => {
-        if (err) {
-            console.error('❌ Erreur lors de l\'insertion:', err);
-            return res.status(500).json({ 
-                success: false, 
-                message: 'Erreur lors de l\'envoi du message' 
+    const mailOptions = {
+    from: email,
+    to: 'acakpothibaut2@gmail.com',
+    subject: `Nouveau message de ${nom} : ${sujet}`,
+    html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+            <h2 style="color: #667eea;">Nouveau message de ${nom}</h2>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Sujet:</strong> ${sujet}</p>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p><strong>Message:</strong></p>
+                <p>${message.replace(/\n/g, '<br>')}</p>
+            </div>
+            <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+            <p style="color: #999; font-size: 0.85em; text-align: center;">
+                Ce message a été envoyé depuis le formulaire de contact de votre portfolio.
+            </p>
+        </div>
+    `
+};
+
+    console.log("Tentative d'envoi d'email à:", mailOptions.to); // Log pour vérifier l'adresse de destination
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Erreur lors de l\'envoi de l\'email:', error); // Log détaillé de l'erreur
+            return res.status(500).json({
+                success: false,
+                message: 'Erreur lors de l\'envoi du message',
+                error: error.message // Ajoute le message d'erreur pour le débogage
             });
         }
 
-        console.log('✅ Message reçu de:', nom);
-        res.status(200).json({ 
-            success: true, 
-            message: 'Message envoyé avec succès!',
-            id: result.insertId
+        console.log('Email envoyé:', info.response); // Log de confirmation
+        res.status(200).json({
+            success: true,
+            message: 'Message envoyé avec succès!'
         });
     });
 });
