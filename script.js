@@ -2,79 +2,154 @@
 const EMAILJS_SERVICE_ID = 'service_qhh2dea';  // À remplacer
 const EMAILJS_TEMPLATE_ID = 'template_u937i15'; // À remplacer
 
+// Icônes représentant le DOMAINE / la nature de chaque projet (et non une technologie)
+// Utilisées pour la grande illustration de chaque carte projet
+const PROJECT_ICONS = {
+    cart: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`,
+    wallet: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
+    pulse: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`,
+    layout: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>`,
+    coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>`,
+    cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
+    bolt: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+    layers: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`
+};
+
 // Data
+// Chaque tag possède un "slug" Simple Icons pour afficher le vrai logo officiel de la technologie
 const projects = [
     {
         id: 1,
-        title: "E-Commerce Platform",
+        title: "NovaBoutique",
         category: "web",
-        icon: "🛒",
-        description: "Plateforme e-commerce complète avec panier, paiement et gestion des commandes.",
-        longDescription: "Une plateforme de commerce électronique complète développée avec React et Node.js. Intègre Stripe pour les paiements, un système de gestion des stocks en temps réel, et un tableau de bord administrateur complet.",
-        tags: ["React", "Node.js", "MongoDB", "Stripe"],
+        icon: "cart",
+        description: "Plateforme e-commerce complète avec panier, paiement Stripe et gestion des commandes.",
+        longDescription: "Plateforme de commerce électronique développée avec React côté client et Node.js/Express côté serveur. Intègre Stripe pour les paiements sécurisés, une gestion des stocks en temps réel et un tableau de bord administrateur pour le suivi des commandes.",
+        tags: [
+            { name: "React", slug: "react" },
+            { name: "Node.js", slug: "nodedotjs" },
+            { name: "MongoDB", slug: "mongodb" },
+            { name: "Stripe", slug: "stripe" }
+        ],
         link: "#"
     },
     {
         id: 2,
-        title: "Application Mobile Fitness",
-        category: "mobile",
-        icon: "💪",
-        description: "Application de suivi d'entraînement et de nutrition.",
-        longDescription: "Application mobile cross-platform permettant aux utilisateurs de suivre leurs entraînements, leur nutrition et leurs progrès. Intègre des graphiques interactifs et un système de gamification.",
-        tags: ["React Native", "Firebase", "Redux"],
+        title: "GestionFinances",
+        category: "web",
+        icon: "wallet",
+        description: "Dashboard de gestion financière personnelle avec visualisation des dépenses.",
+        longDescription: "Application web permettant de suivre revenus, dépenses et budgets mensuels. Back-end en PHP avec base de données MySQL, graphiques interactifs pour visualiser la répartition des dépenses par catégorie, export des données en PDF.",
+        tags: [
+            { name: "PHP", slug: "php" },
+            { name: "MySQL", slug: "mysql" },
+            { name: "JavaScript", slug: "javascript" },
+            { name: "Chart.js", slug: "chartdotjs" }
+        ],
         link: "#"
     },
     {
         id: 3,
-        title: "Dashboard Analytics",
+        title: "MédiRDV",
         category: "web",
-        icon: "📊",
-        description: "Tableau de bord analytique avec visualisations de données en temps réel.",
-        longDescription: "Dashboard moderne avec visualisations de données complexes, mises à jour en temps réel via WebSocket, et exports personnalisables. Optimisé pour gérer de grands volumes de données.",
-        tags: ["Vue.js", "D3.js", "WebSocket", "PostgreSQL"],
+        icon: "pulse",
+        description: "Plateforme de prise de rendez-vous médicaux en ligne pour cabinets et patients.",
+        longDescription: "Système complet de réservation de créneaux médicaux : espace patient, espace praticien, gestion des disponibilités et rappels automatiques par email. Architecture PHP/MySQL avec une interface dynamique en JavaScript.",
+        tags: [
+            { name: "PHP", slug: "php" },
+            { name: "MySQL", slug: "mysql" },
+            { name: "JavaScript", slug: "javascript" },
+            { name: "Bootstrap", slug: "bootstrap" }
+        ],
         link: "#"
     },
     {
         id: 4,
-        title: "Portfolio Design System",
-        category: "design",
-        icon: "🎨",
-        description: "Système de design complet pour une cohérence visuelle.",
-        longDescription: "Système de design complet incluant une bibliothèque de composants réutilisables, des guidelines de marque, et une documentation interactive. Construit avec Storybook.",
-        tags: ["Figma", "Storybook", "CSS", "Design Tokens"],
+        title: "GestionTâches",
+        category: "web",
+        icon: "layout",
+        description: "Outil collaboratif de gestion de projets en mode kanban, temps réel.",
+        longDescription: "Application de gestion de projets façon kanban avec colonnes personnalisables, glisser-déposer des tâches, notifications en temps réel et permissions par équipe. Front-end React/TypeScript, API Node.js et base PostgreSQL.",
+        tags: [
+            { name: "React", slug: "react" },
+            { name: "TypeScript", slug: "typescript" },
+            { name: "Node.js", slug: "nodedotjs" },
+            { name: "PostgreSQL", slug: "postgresql" }
+        ],
         link: "#"
     },
     {
         id: 5,
-        title: "API REST Scalable",
+        title: "RestoRésa",
         category: "web",
-        icon: "⚡",
-        description: "API RESTful haute performance avec authentification JWT.",
-        longDescription: "API RESTful robuste et scalable avec authentification JWT, rate limiting, caching avec Redis, et documentation Swagger complète. Déployée sur AWS avec CI/CD.",
-        tags: ["Node.js", "Express", "Redis", "AWS"],
+        icon: "coffee",
+        description: "Système de commande en ligne et réservation de tables pour restaurants.",
+        longDescription: "Solution pensée pour les restaurants indépendants : menu en ligne, commande à emporter, réservation de table avec plan de salle, back-office PHP pour gérer les plats et les créneaux. Base de données MySQL relationnelle.",
+        tags: [
+            { name: "PHP", slug: "php" },
+            { name: "JavaScript", slug: "javascript" },
+            { name: "MySQL", slug: "mysql" },
+            { name: "HTML5", slug: "html5" }
+        ],
         link: "#"
     },
     {
         id: 6,
-        title: "App de Réservation",
+        title: "MétéoInstant",
+        category: "web",
+        icon: "cloud",
+        description: "Application météo temps réel avec prévisions et visualisations interactives.",
+        longDescription: "Application météo consommant une API REST publique, avec géolocalisation, prévisions sur 7 jours et graphiques d'évolution de la température construits avec Chart.js. Optimisée pour un chargement rapide et une interface fluide.",
+        tags: [
+            { name: "JavaScript", slug: "javascript" },
+            { name: "Chart.js", slug: "chartdotjs" },
+            { name: "HTML5", slug: "html5" },
+            { name: "CSS3", slug: "css" }
+        ],
+        link: "#"
+    },
+    {
+        id: 7,
+        title: "SuiviForme Mobile",
         category: "mobile",
-        icon: "📅",
-        description: "Application de réservation en ligne avec calendrier interactif.",
-        longDescription: "Application permettant la réservation de services en ligne avec gestion de calendrier, notifications push, et paiements intégrés. Interface intuitive et fluide.",
-        tags: ["Flutter", "Firebase", "Google Calendar API"],
+        icon: "bolt",
+        description: "Application mobile de suivi d'entraînement et de nutrition.",
+        longDescription: "Application mobile cross-platform permettant de suivre séances d'entraînement, apports nutritionnels et progression. Synchronisation cloud via Firebase et graphiques de suivi de performance.",
+        tags: [
+            { name: "React Native", slug: "react" },
+            { name: "Firebase", slug: "firebase" },
+            { name: "JavaScript", slug: "javascript" }
+        ],
+        link: "#"
+    },
+    {
+        id: 8,
+        title: "Système de Design",
+        category: "design",
+        icon: "layers",
+        description: "Système de design complet pour une cohérence visuelle.",
+        longDescription: "Système de design complet incluant une bibliothèque de composants réutilisables (React + Storybook), des tokens de design, et une documentation interactive avec vérification d'accessibilité.",
+        tags: [
+            { name: "Figma", slug: "figma" },
+            { name: "Storybook", slug: "storybook" },
+            { name: "React", slug: "react" },
+            { name: "CSS3", slug: "css" }
+        ],
         link: "#"
     }
 ];
 
 const skills = [
-    { name: "HTML/CSS", icon: "🌐", level: 95 },
-    { name: "JavaScript", icon: "⚡", level: 90 },
-    { name: "React", icon: "⚛️", level: 88 },
-    { name: "Node.js", icon: "🟢", level: 85 },
-    { name: "Vue.js", icon: "💚", level: 82 },
-    { name: "MongoDB", icon: "🍃", level: 80 },
-    { name: "UI/UX Design", icon: "🎨", level: 85 },
-    { name: "TypeScript", icon: "📘", level: 83 }
+    { name: "PHP (langage principal)", slug: "php", level: 92 },
+    { name: "JavaScript", slug: "javascript", level: 90 },
+    { name: "React", slug: "react", level: 88 },
+    { name: "Node.js", slug: "nodedotjs", level: 85 },
+    { name: "HTML5", slug: "html5", level: 95 },
+    { name: "CSS3", slug: "css", level: 93 },
+    { name: "Vue.js", slug: "vuedotjs", level: 82 },
+    { name: "MongoDB", slug: "mongodb", level: 80 },
+    { name: "TypeScript", slug: "typescript", level: 83 },
+    { name: "Figma (UI/UX)", slug: "figma", level: 85 }
 ];
 
 // Loading
@@ -217,7 +292,7 @@ function renderProjects(filter = 'all') {
         card.setAttribute('data-category', project.category);
         card.innerHTML = `
             <div class="project-image">
-                ${project.icon}
+                <div class="project-icon-logo">${PROJECT_ICONS[project.icon]}</div>
                 <div class="project-overlay">
                     <button onclick="openModal(${project.id})">Voir plus</button>
                 </div>
@@ -225,8 +300,11 @@ function renderProjects(filter = 'all') {
             <div class="project-info">
                 <h3>${project.title}</h3>
                 <p>${project.description}</p>
+                <div class="project-tech-logos">
+                    ${project.tags.map(tag => `<img src="https://cdn.simpleicons.org/${tag.slug}" alt="${tag.name}" title="${tag.name}" loading="lazy">`).join('')}
+                </div>
                 <div class="project-tags">
-                    ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    ${project.tags.map(tag => `<span class="tag">${tag.name}</span>`).join('')}
                 </div>
             </div>
         `;
@@ -253,11 +331,14 @@ function openModal(projectId) {
     const modalBody = document.getElementById('modalBody');
     
     modalBody.innerHTML = `
-        <div class="modal-image">${project.icon}</div>
+        <div class="modal-image"><div class="modal-icon-logo">${PROJECT_ICONS[project.icon]}</div></div>
         <h2>${project.title}</h2>
         <p style="margin: 1rem 0;">${project.longDescription}</p>
+        <div class="project-tech-logos">
+            ${project.tags.map(tag => `<img src="https://cdn.simpleicons.org/${tag.slug}" alt="${tag.name}" title="${tag.name}" loading="lazy">`).join('')}
+        </div>
         <div class="project-tags">
-            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            ${project.tags.map(tag => `<span class="tag">${tag.name}</span>`).join('')}
         </div>
         <a href="${project.link}" class="btn btn-primary" style="margin-top: 2rem;">Voir le projet</a>
     `;
@@ -284,7 +365,7 @@ function renderSkills() {
         const card = document.createElement('div');
         card.className = 'skill-card';
         card.innerHTML = `
-            <div class="skill-icon">${skill.icon}</div>
+            <div class="skill-icon"><img src="https://cdn.simpleicons.org/${skill.slug}" alt="${skill.name}" loading="lazy"></div>
             <div class="skill-name">${skill.name}</div>
             <div class="skill-bar">
                 <div class="skill-progress" style="--progress: ${skill.level}%"></div>
