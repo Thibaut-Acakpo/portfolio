@@ -2,22 +2,67 @@
 const EMAILJS_SERVICE_ID = 'service_qhh2dea';  // À remplacer
 const EMAILJS_TEMPLATE_ID = 'template_u937i15'; // À remplacer
 
-// Icônes représentant le DOMAINE / la nature de chaque projet (et non une technologie)
-// Utilisées pour la grande illustration de chaque carte projet
-const PROJECT_ICONS = {
-    cart: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`,
-    wallet: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
-    pulse: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`,
-    layout: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>`,
-    coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>`,
-    cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
-    bolt: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
-    layers: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`
-};
+// Limite de projets affichés avant le bouton "Voir tous"
+const PROJECTS_LIMIT = 9;
+let showAllProjects = false;
 
 // Data
-// Chaque tag possède un "slug" Simple Icons pour afficher le vrai logo officiel de la technologie
 const projects = [
+    // ============================================
+    // 3 NOUVEAUX PROJETS (en premier)
+    // ============================================
+    {
+        id: 9,
+        title: "PrononciA+",
+        category: "web-mobile",
+        image: "images/projets/prononcia.jpg",
+        description: "Application d'apprentissage qui améliore ta prononciation anglaise en pointant des objets réels avec la caméra.",
+        longDescription: "Application innovante utilisant l'IA (TensorFlow.js + MediaPipe) pour reconnaître en temps réel les objets pointés par l'utilisateur via la caméra, et l'aider à prononcer leur nom en anglais. Système de retour immédiat sur la prononciation, défi quotidien avec classement en direct via WebSockets, et suivi détaillé des progrès avec graphiques interactifs. Fonctionne comme PWA installable sur mobile.",
+        tags: [
+            { name: "React", slug: "react" },
+            { name: "TensorFlow", slug: "tensorflow" },
+            { name: "MediaPipe", slug: "google" },
+            { name: "MySQL", slug: "mysql" },
+            { name: "Socket.IO", slug: "socketdotio" },
+            { name: "Vite", slug: "vite" }
+        ],
+        link: "#"
+    },
+    {
+        id: 10,
+        title: "Atelier Réparation",
+        category: "web",
+        image: "images/projets/atelier-reparation.jpg",
+        description: "Site vitrine pour atelier de réparation électronique avec suivi de réparation en ligne.",
+        longDescription: "Plateforme complète pour un atelier de réparation au Bénin : présentation des services (réparation matérielle, logicielle, diagnostic gratuit, maintenance), prise de rendez-vous en ligne, suivi en temps réel des réparations et gestion administrative des demandes clients. Back-office sécurisé avec authentification JWT.",
+        tags: [
+            { name: "React", slug: "react" },
+            { name: "TailwindCSS", slug: "tailwindcss" },
+            { name: "Node.js", slug: "nodedotjs" },
+            { name: "PostgreSQL", slug: "postgresql" },
+            { name: "Vite", slug: "vite" }
+        ],
+        link: "https://atelier-reparation.onrender.com"
+    },
+    {
+        id: 11,
+        title: "Gestion de Tontines",
+        category: "web",
+        image: "images/projets/tontines.jpg",
+        description: "Plateforme de gestion transparente et sécurisée des tontines avec suivi des cotisations.",
+        longDescription: "Application web qui digitalise la gestion des tontines : organisation des tours, suivi de chaque cotisation, versement des bénéficiaires en toute confiance. Livre de comptes inviolable, paiements sécurisés, gestion des rôles (administrateur, gestionnaire, trésorier, membre) et interface sombre moderne. Back-end sécurisé avec hachage Argon2, validation Zod et protection Helmet.",
+        tags: [
+            { name: "React", slug: "react" },
+            { name: "Node.js", slug: "nodedotjs" },
+            { name: "MySQL", slug: "mysql" },
+            { name: "Vite", slug: "vite" },
+            { name: "Argon2", slug: "letsencrypt" }
+        ],
+        link: "#"
+    },
+    // ============================================
+    // 8 ANCIENS PROJETS
+    // ============================================
     {
         id: 1,
         title: "NovaBoutique",
@@ -139,6 +184,7 @@ const projects = [
     }
 ];
 
+// Compétences
 const skills = [
     { name: "PHP (langage principal)", slug: "php", level: 92 },
     { name: "JavaScript", slug: "javascript", level: 90 },
@@ -149,19 +195,35 @@ const skills = [
     { name: "Vue.js", slug: "vuedotjs", level: 82 },
     { name: "MongoDB", slug: "mongodb", level: 80 },
     { name: "TypeScript", slug: "typescript", level: 83 },
-    { name: "Figma (UI/UX)", slug: "figma", level: 85 }
+    { name: "Figma (UI/UX)", slug: "figma", level: 85 },
+    { name: "MySQL (base de données principale)", slug: "mysql", level: 90 },
+    { name: "PostgreSQL", slug: "postgresql", level: 85 },
+    { name: "SQLite", slug: "sqlite", level: 82 }
 ];
 
-// Loading
+// ========== ICÔNES SVG (pour les 8 anciens projets) ==========
+const PROJECT_ICONS = {
+    cart: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`,
+    wallet: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
+    pulse: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`,
+    layout: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>`,
+    coffee: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>`,
+    cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
+    bolt: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+    layers: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`
+};
+
+// ========== Loading ==========
 window.addEventListener('load', () => {
     setTimeout(() => {
         document.getElementById('loading').classList.add('hidden');
     }, 1000);
 });
 
-// Particles
+// ========== Particles ==========
 function createParticles() {
     const container = document.getElementById('particles');
+    if (!container) return;
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -174,7 +236,7 @@ function createParticles() {
 }
 createParticles();
 
-// Typing Effect
+// ========== Typing Effect ==========
 const texts = ['Développeur Full Stack', 'Designer UI/UX', 'Créateur d\'Expériences'];
 let textIndex = 0;
 let charIndex = 0;
@@ -182,6 +244,7 @@ let isDeleting = false;
 const typingElement = document.querySelector('.typing');
 
 function type() {
+    if (!typingElement) return;
     const currentText = texts[textIndex];
     
     if (isDeleting) {
@@ -209,25 +272,28 @@ function type() {
 }
 type();
 
-// Menu Toggle
+// ========== Menu Toggle ==========
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
-
-navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
     });
-});
 
-// Header Hide on Scroll
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+}
+
+// ========== Header Hide on Scroll ==========
 let lastScroll = 0;
 const header = document.getElementById('header');
 
 window.addEventListener('scroll', () => {
+    if (!header) return;
     const currentScroll = window.pageYOffset;
     
     if (currentScroll > lastScroll && currentScroll > 100) {
@@ -238,7 +304,7 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Smooth Scroll
+// ========== Smooth Scroll ==========
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -249,7 +315,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Counter Animation
+// ========== Counter Animation ==========
 function animateCounter(element) {
     const target = parseInt(element.getAttribute('data-target'));
     let current = 0;
@@ -277,22 +343,34 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 counters.forEach(counter => counterObserver.observe(counter));
 
-// Projects
+// ========== Projects ==========
 function renderProjects(filter = 'all') {
     const grid = document.getElementById('projectsGrid');
+    if (!grid) return;
     grid.innerHTML = '';
     
-    const filteredProjects = filter === 'all' 
+    let filteredProjects = filter === 'all' 
         ? projects 
         : projects.filter(p => p.category === filter);
+
+    const totalProjects = filteredProjects.length;
+    if (!showAllProjects && totalProjects > PROJECTS_LIMIT) {
+        filteredProjects = filteredProjects.slice(0, PROJECTS_LIMIT);
+    }
 
     filteredProjects.forEach(project => {
         const card = document.createElement('div');
         card.className = 'project-card';
         card.setAttribute('data-category', project.category);
+        
+        // Si le projet a une image, on l'affiche. Sinon, on utilise l'icône SVG
+        const imageContent = project.image 
+            ? `<img src="${project.image}" alt="${project.title}" loading="lazy">`
+            : `<div class="project-icon-logo">${PROJECT_ICONS[project.icon]}</div>`;
+        
         card.innerHTML = `
             <div class="project-image">
-                <div class="project-icon-logo">${PROJECT_ICONS[project.icon]}</div>
+                ${imageContent}
                 <div class="project-overlay">
                     <button onclick="openModal(${project.id})">Voir plus</button>
                 </div>
@@ -310,6 +388,26 @@ function renderProjects(filter = 'all') {
         `;
         grid.appendChild(card);
     });
+
+    // Gestion du bouton "Voir tous"
+    const btnContainer = document.getElementById('showAllContainer');
+    if (btnContainer) {
+        if (filter === 'all' && totalProjects > PROJECTS_LIMIT) {
+            btnContainer.style.display = 'flex';
+            const btn = document.getElementById('showAllBtn');
+            btn.textContent = showAllProjects 
+                ? 'Voir moins de projets' 
+                : `Voir tous les projets (${totalProjects})`;
+        } else {
+            btnContainer.style.display = 'none';
+        }
+    }
+}
+
+// Bouton "Voir tous les projets"
+function toggleShowAllProjects() {
+    showAllProjects = !showAllProjects;
+    renderProjects('all');
 }
 
 // Filter Projects
@@ -318,20 +416,26 @@ filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        showAllProjects = false; // reset quand on change de filtre
         renderProjects(btn.getAttribute('data-filter'));
     });
 });
 
 renderProjects();
 
-// Modal
+// ========== Modal ==========
 function openModal(projectId) {
     const project = projects.find(p => p.id === projectId);
+    if (!project) return;
     const modal = document.getElementById('projectModal');
     const modalBody = document.getElementById('modalBody');
     
+    const imageContent = project.image 
+        ? `<img src="${project.image}" alt="${project.title}" style="width:100%;height:100%;object-fit:cover;">`
+        : `<div class="modal-icon-logo">${PROJECT_ICONS[project.icon]}</div>`;
+    
     modalBody.innerHTML = `
-        <div class="modal-image"><div class="modal-icon-logo">${PROJECT_ICONS[project.icon]}</div></div>
+        <div class="modal-image">${imageContent}</div>
         <h2>${project.title}</h2>
         <p style="margin: 1rem 0;">${project.longDescription}</p>
         <div class="project-tech-logos">
@@ -340,7 +444,7 @@ function openModal(projectId) {
         <div class="project-tags">
             ${project.tags.map(tag => `<span class="tag">${tag.name}</span>`).join('')}
         </div>
-        <a href="${project.link}" class="btn btn-primary" style="margin-top: 2rem;">Voir le projet</a>
+        <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 2rem;">Voir le projet</a>
     `;
     
     modal.classList.add('active');
@@ -352,15 +456,16 @@ function closeModal() {
     document.body.style.overflow = 'auto';
 }
 
-document.getElementById('projectModal').addEventListener('click', (e) => {
+document.getElementById('projectModal')?.addEventListener('click', (e) => {
     if (e.target.id === 'projectModal') {
         closeModal();
     }
 });
 
-// Skills
+// ========== Skills ==========
 function renderSkills() {
     const grid = document.getElementById('skillsGrid');
+    if (!grid) return;
     skills.forEach(skill => {
         const card = document.createElement('div');
         card.className = 'skill-card';
@@ -377,7 +482,7 @@ function renderSkills() {
 }
 renderSkills();
 
-// Skills Animation
+// ========== Skills Animation ==========
 const skillCards = document.querySelectorAll('.skill-card');
 const skillObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -389,40 +494,32 @@ const skillObserver = new IntersectionObserver((entries) => {
 
 skillCards.forEach(card => skillObserver.observe(card));
 
-// ⚠️ NOUVEAU CODE : Formulaire avec EmailJS
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+// ========== Formulaire avec EmailJS ==========
+document.getElementById('contactForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
     const submitBtn = document.getElementById('submitBtn');
     const originalText = submitBtn.textContent;
     
-    // Désactiver le bouton
     submitBtn.disabled = true;
     submitBtn.textContent = 'Envoi en cours...';
     
-    // Envoyer l'email avec EmailJS
     emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
-            
-            // Réinitialiser le formulaire
             document.getElementById('contactForm').reset();
-            
-            // Afficher le modal de succès
             showSuccessModal();
-            
         }, function(error) {
             console.log('FAILED...', error);
             alert('❌ Erreur lors de l\'envoi. Veuillez réessayer.');
         })
         .finally(function() {
-            // Réactiver le bouton
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
         });
 });
 
-// Fonctions Modal de Succès
+// ========== Modal de Succès ==========
 function showSuccessModal() {
     const modal = document.getElementById('successModal');
     if (modal) {
@@ -439,17 +536,17 @@ function closeSuccessModal() {
     }
 }
 
-// Fermer le modal en cliquant à l'extérieur
 document.getElementById('successModal')?.addEventListener('click', function(e) {
     if (e.target.id === 'successModal') {
         closeSuccessModal();
     }
 });
 
-// Scroll to Top
+// ========== Scroll to Top ==========
 const scrollTop = document.getElementById('scrollTop');
 
 window.addEventListener('scroll', () => {
+    if (!scrollTop) return;
     if (window.pageYOffset > 300) {
         scrollTop.classList.add('visible');
     } else {
@@ -457,6 +554,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-scrollTop.addEventListener('click', () => {
+scrollTop?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
