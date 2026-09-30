@@ -58,7 +58,7 @@ const projects = [
             { name: "Vite", slug: "vite" },
             { name: "Argon2", slug: "letsencrypt" }
         ],
-        link: "#"
+        link: "https://tontine-sooty.vercel.app"
     },
     // ============================================
     // 8 ANCIENS PROJETS
