@@ -26,7 +26,7 @@ const projects = [
             { name: "Socket.IO", slug: "socketdotio" },
             { name: "Vite", slug: "vite" }
         ],
-        link: "#"
+        link: "https://prononciation.onrender.com"
     },
     {
         id: 10,
@@ -81,7 +81,7 @@ const projects = [
     {
         id: 2,
         title: "GestionFinances",
-        category: "web",
+        image: "images/projets/finances.jpg",
         icon: "wallet",
         description: "Dashboard de gestion financière personnelle avec visualisation des dépenses.",
         longDescription: "Application web permettant de suivre revenus, dépenses et budgets mensuels. Back-end en PHP avec base de données MySQL, graphiques interactifs pour visualiser la répartition des dépenses par catégorie, export des données en PDF.",
