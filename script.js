@@ -91,7 +91,7 @@ const projects = [
             { name: "JavaScript", slug: "javascript" },
             { name: "Chart.js", slug: "chartdotjs" }
         ],
-        link: "#"
+        link: "https://gestion-finances.onrender.com"
     },
     {
         id: 3,
