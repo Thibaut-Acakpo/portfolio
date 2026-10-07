@@ -14,7 +14,7 @@ const projects = [
     {
         id: 9,
         title: "PrononciA+",
-        category: "web-mobile",
+        category: "web",
         image: "images/projets/prononcia.jpg",
         description: "Application d'apprentissage qui améliore ta prononciation anglaise en pointant des objets réels avec la caméra.",
         longDescription: "Application innovante utilisant l'IA (TensorFlow.js + MediaPipe) pour reconnaître en temps réel les objets pointés par l'utilisateur via la caméra, et l'aider à prononcer leur nom en anglais. Système de retour immédiat sur la prononciation, défi quotidien avec classement en direct via WebSockets, et suivi détaillé des progrès avec graphiques interactifs. Fonctionne comme PWA installable sur mobile.",
@@ -65,16 +65,18 @@ const projects = [
     // ============================================
     {
         id: 1,
-        title: "NovaBoutique",
+        title: "GestionDons",
         category: "web",
-        icon: "cart",
-        description: "Plateforme e-commerce complète avec panier, paiement Stripe et gestion des commandes.",
-        longDescription: "Plateforme de commerce électronique développée avec React côté client et Node.js/Express côté serveur. Intègre Stripe pour les paiements sécurisés, une gestion des stocks en temps réel et un tableau de bord administrateur pour le suivi des commandes.",
+        image: "images/projets/gestion-dons.jpg",
+        icon: "heart",
+        description: "Site de collecte et de suivi de dons pour un orphelinat, avec gestion des besoins et reçus PDF.",
+        longDescription: "Plateforme de collecte de dons et de suivi des contributions pour l’Orphelinat du Centre YƐtƐn. Elle permet de gérer les dons financiers et matériels, afficher les besoins avec filtres, traiter les contributions via un parcours dédié, générer un reçu PDF, suivre l’historique par numéro de téléphone et superviser la collecte depuis un espace d’administration. Développée en PHP/MySQL sans framework, avec sécurité, export CSV, gestion des répartitions et tableau de bord administratif.",
         tags: [
-            { name: "React", slug: "react" },
-            { name: "Node.js", slug: "nodedotjs" },
-            { name: "MongoDB", slug: "mongodb" },
-            { name: "Stripe", slug: "stripe" }
+            { name: "PHP", slug: "php" },
+            { name: "MySQL", slug: "mysql" },
+            { name: "JavaScript", slug: "javascript" },
+            { name: "HTML5", slug: "html5" },
+            { name: "CSS3", slug: "css" }
         ],
         link: "#"
     },
@@ -142,6 +144,7 @@ const projects = [
         id: 6,
         title: "MétéoInstant",
         category: "web",
+        image: "images/projets/meteo-instant.jpg",
         icon: "cloud",
         description: "Application météo temps réel avec prévisions et visualisations interactives.",
         longDescription: "Application météo consommant une API REST publique, avec géolocalisation, prévisions sur 7 jours et graphiques d'évolution de la température construits avec Chart.js. Optimisée pour un chargement rapide et une interface fluide.",
@@ -151,7 +154,7 @@ const projects = [
             { name: "HTML5", slug: "html5" },
             { name: "CSS3", slug: "css" }
         ],
-        link: "#"
+        link: "https://thibaut-acakpo.github.io/meteoInstant"
     },
     {
         id: 7,
@@ -203,7 +206,7 @@ const skills = [
 
 // ========== ICÔNES SVG (pour les 8 anciens projets) ==========
 const PROJECT_ICONS = {
-    cart: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`,
+    heart: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8.5-5.2-10.5-9.7C.5 8.8 2.8 4 7.1 4c2.1 0 3.3 1.1 4.1 2.2C12 5.1 13.2 4 15.3 4c4.3 0 6.6 4.8 5.6 7.3C20.5 15.8 12 21 12 21z"></path></svg>`,
     wallet: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
     pulse: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`,
     layout: `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>`,
