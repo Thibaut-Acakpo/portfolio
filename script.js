@@ -99,6 +99,7 @@ const projects = [
         id: 3,
         title: "MédiRDV",
         category: "web",
+        image: "images/projets/medirdv.jpg",
         icon: "pulse",
         description: "Plateforme de prise de rendez-vous médicaux en ligne pour cabinets et patients.",
         longDescription: "Système complet de réservation de créneaux médicaux : espace patient, espace praticien, gestion des disponibilités et rappels automatiques par email. Architecture PHP/MySQL avec une interface dynamique en JavaScript.",
@@ -108,7 +109,7 @@ const projects = [
             { name: "JavaScript", slug: "javascript" },
             { name: "Bootstrap", slug: "bootstrap" }
         ],
-        link: "#"
+        link: "https://medirdv.freedev.app/public/"
     },
     {
         id: 4,
