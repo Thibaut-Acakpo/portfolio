@@ -65,14 +65,13 @@ const projects = [
         title: "DevQuiz",
         category: "web",
         image: "images/projets/devquiz.jpg",
-        description: "Le quiz du développement web.",
-        longDescription: "Application web de quiz dédiée aux langages et concepts du développement. Les questions changent à chaque partie, le score est calculé automatiquement, et l'interface sombre met en avant une expérience dynamique et immersive inspirée des plateformes de code et de culture dev.",
+        description: "Quiz du développement web, installable et utilisable hors ligne.",
+        longDescription: "Application PWA de quiz sur les notions du développement web. Les questions changent à chaque partie, l'ordre des réponses est mélangé, et l'expérience fonctionne hors ligne grâce à un service worker. Aucune base de données ni backend n'est nécessaire : le projet est entièrement conçu en HTML, CSS et JavaScript.",
         tags: [
             { name: "JavaScript", slug: "javascript" },
             { name: "HTML5", slug: "html5" },
             { name: "CSS3", slug: "css" },
-            { name: "MySQL", slug: "mysql" },
-            { name: "Node.js", slug: "nodedotjs" }
+            { name: "PWA", slug: "progressivewebapps" }
         ],
         link: "https://thibaut-acakpo.github.io/devquiz/"
     },
