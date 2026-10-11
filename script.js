@@ -60,6 +60,22 @@ const projects = [
         ],
         link: "https://tontine-sooty.vercel.app"
     },
+    {
+        id: 12,
+        title: "DevQuiz",
+        category: "web",
+        image: "images/projets/devquiz.jpg",
+        description: "Le quiz du développement web.",
+        longDescription: "Application web de quiz dédiée aux langages et concepts du développement. Les questions changent à chaque partie, le score est calculé automatiquement, et l'interface sombre met en avant une expérience dynamique et immersive inspirée des plateformes de code et de culture dev.",
+        tags: [
+            { name: "JavaScript", slug: "javascript" },
+            { name: "HTML5", slug: "html5" },
+            { name: "CSS3", slug: "css" },
+            { name: "MySQL", slug: "mysql" },
+            { name: "Node.js", slug: "nodedotjs" }
+        ],
+        link: "https://thibaut-acakpo.github.io/devquiz/"
+    },
     // ============================================
     // 8 ANCIENS PROJETS
     // ============================================
