@@ -130,6 +130,7 @@ const projects = [
         id: 4,
         title: "GestionTâches",
         category: "web",
+        image: "images/projets/gestion-tâches.jpg",
         icon: "layout",
         description: "Outil collaboratif de gestion de projets en mode kanban, temps réel.",
         longDescription: "Application de gestion de projets façon kanban avec colonnes personnalisables, glisser-déposer des tâches, notifications en temps réel et permissions par équipe. Front-end React/TypeScript, API Node.js et base PostgreSQL.",
