@@ -2,11 +2,88 @@
 const EMAILJS_SERVICE_ID = 'service_qhh2dea';  // À remplacer
 const EMAILJS_TEMPLATE_ID = 'template_u937i15'; // À remplacer
 
+// ========== EFFET DE FEUILLES ==========
+function createLeaves() {
+    const container = document.getElementById('leaves-container');
+    if (!container) return;
+    
+    // Nombre de feuilles à l'écran
+    const leafCount = 20; 
+
+    for (let i = 0; i < leafCount; i++) {
+        const leaf = document.createElement('div');
+        leaf.classList.add('leaf');
+        
+        // Taille aléatoire entre 10px et 25px
+        const size = Math.random() * 15 + 10;
+        leaf.style.width = `${size}px`;
+        leaf.style.height = `${size}px`;
+        
+        // Position horizontale aléatoire
+        leaf.style.left = `${Math.random() * 100}%`;
+        
+        // Durée de chute aléatoire (entre 6s et 15s)
+        const duration = Math.random() * 9 + 6;
+        leaf.style.animationDuration = `${duration}s`;
+        
+        // Délai de départ aléatoire pour ne pas qu'elles tombent toutes en même temps
+        leaf.style.animationDelay = `-${Math.random() * 10}s`;
+        
+        container.appendChild(leaf);
+    }
+}
+
+// Lancer la création des feuilles
+createLeaves();
+
 // Limite de projets affichés avant le bouton "Voir tous"
 const PROJECTS_LIMIT = 9;
 let showAllProjects = false;
 
-// Data
+// ========== NOUVEAUX EFFETS HERO ==========
+
+// --- Effet de lueur qui suit la souris ---
+const hero = document.getElementById('hero');
+const glow = document.getElementById('heroGlow');
+
+if (hero && glow) {
+    hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        glow.style.opacity = '1';
+        glow.style.left = `${x}px`;
+        glow.style.top = `${y}px`;
+    });
+
+    hero.addEventListener('mouseleave', () => {
+        glow.style.opacity = '0';
+    });
+}
+
+// --- Effet Machine à écrire (Typewriter) ---
+const typewriterElement = document.getElementById('typewriter');
+if (typewriterElement) {
+    const text = typewriterElement.innerText;
+    typewriterElement.innerText = '';
+    
+    let i = 0;
+    const speed = 50; // Vitesse en ms
+
+    function typeWriter() {
+        if (i < text.length) {
+            typewriterElement.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+    
+    // Démarrer l'animation après un petit délai
+    setTimeout(typeWriter, 800);
+}
+
+// ========== DATA PROJETS ==========
 const projects = [
     // ============================================
     // 3 NOUVEAUX PROJETS (en premier)
@@ -255,42 +332,6 @@ function createParticles() {
     }
 }
 createParticles();
-
-// ========== Typing Effect ==========
-const texts = ['Développeur Full Stack', 'Designer UI/UX', 'Créateur d\'Expériences'];
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typingElement = document.querySelector('.typing');
-
-function type() {
-    if (!typingElement) return;
-    const currentText = texts[textIndex];
-    
-    if (isDeleting) {
-        typingElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typingElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-    }
-
-    typingElement.innerHTML = typingElement.textContent + '<span class="cursor"></span>';
-
-    let delay = isDeleting ? 50 : 100;
-
-    if (!isDeleting && charIndex === currentText.length) {
-        delay = 2000;
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
-        delay = 500;
-    }
-
-    setTimeout(type, delay);
-}
-type();
 
 // ========== Menu Toggle ==========
 const menuToggle = document.getElementById('menuToggle');
@@ -577,4 +618,3 @@ window.addEventListener('scroll', () => {
 scrollTop?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
-

@@ -42,53 +42,111 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - MISE À JOUR -->
     <section id="hero">
-    <div class="hero-content">
-        <!-- Badge "Bonjour, je suis" -->
-        <div class="hero-badge">Bonjour, je suis</div>
+        <!-- NOUVEAU : Conteneur pour l'effet de feuilles -->
+        <div id="leaves-container"></div>
+
+        <!-- Effet de lueur qui suit la souris -->
+        <div class="hero-glow" id="heroGlow"></div>
         
-        <!-- Nom avec "Acakpo" en violet -->
-        <h1 class="hero-name">Thibaut <span>Acakpo</span></h1>
-        
-        <!-- Texte animé (typing) -->
-        <div class="typing"></div>
-        
-        <!-- Boutons -->
-        <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-            <a href="#contact" class="btn btn-outline">Me contacter</a>
+        <div class="hero-content">
+            <div class="hero-copy">
+                <div class="hero-eyebrow">
+                    Développeur Full-Stack · Cotonou, Bénin
+                </div>
+                
+                <h1 class="hero-name">
+                    <span class="hero-name-first">Thibaut</span>
+                    <span class="hero-name-last">Acakpo</span>
+                </h1>
+                
+                <div class="hero-role">
+                    <span id="typewriter">Des outils web qui font gagner du temps.</span>
+                </div>
+                
+                <p class="hero-description">
+                    Conception, interface et développement réunis pour répondre à vos enjeux métier avec élégance et performance.
+                </p>
+                
+                <div class="hero-stack">
+                    <span>PHP</span>
+                    <span>MySQL</span>
+                    <span>JavaScript</span>
+                    <span>React</span>
+                    <span>Node.js</span>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        Explorer mes réalisations
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        Me contacter
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Visuel de droite avec la photo de profil -->
+            <div class="hero-visual">
+                <div class="hero-visual-frame">
+                    <!-- Remplacez par le chemin exact de votre image -->
+                    <img src="images/profil.jpg" alt="Thibaut Acakpo - Développeur Full-Stack">
+                </div>
+            </div>
         </div>
-    </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section-light">
+        <!-- About Section -->
+        <section id="about" class="section-light">
         <div class="container">
             <h2>À Propos de Moi</h2>
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="images/profil.jpg" alt="Photo de Thibaut">
-                </div>
-
-                <div class="about-text">
-                    <p>Je suis un développeur web passionné, développeur depuis 2023 et spécialisé en PHP — mon langage de prédilection — dans la création d'applications web modernes et performantes.</p>
+            
+            <div class="about-text-grid">
+                <div class="about-column">
+                    <p>Installé à Cotonou, je développe depuis 2023 avec PHP, MySQL, JavaScript et React, des technologies que je mobilise selon les objectifs de chaque réalisation.</p>
+                    <p>Mon travail couvre des domaines variés : solidarité, gestion financière, santé, services de proximité et apprentissage interactif.</p>
+                    <p>Je m'attache à rendre chaque parcours intuitif, à protéger les données et à offrir une expérience confortable sur mobile comme sur ordinateur.</p>
                     <p>Ma mission est de transformer des idées innovantes en expériences digitales exceptionnelles qui captivent les utilisateurs et génèrent des résultats.</p>
                     <p>Je maîtrise l'ensemble du stack de développement, du front-end au back-end, et j'aime relever des défis techniques complexes.</p>
-                    <div class="stats">
-                        <div class="stat-card">
-                            <div class="stat-number" data-target="50">0</div>
-                            <div>Projets réalisés</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" data-target="30">0</div>
-                            <div>Clients satisfaits</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" data-target="3">0</div>
-                            <div>Années d'expérience</div>
-                        </div>
-                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" data-target="30">0</div>
+                    <div>Projets réalisés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="15">0</div>
+                    <div>Clients satisfaits</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="3">0</div>
+                    <div>Années d'expérience</div>
+                </div>
+            </div>
+
+            <div class="about-focus">
+                <h3>Des solutions pensées pour des besoins réels</h3>
+                <div class="about-focus-grid">
+                    <article class="about-focus-item">
+                        <span class="about-focus-number">01</span>
+                        <h4>Applications de gestion</h4>
+                        <p>Suivi des opérations, tableaux de bord, rôles utilisateurs et génération de documents pour simplifier les tâches du quotidien.</p>
+                    </article>
+                    <article class="about-focus-item">
+                        <span class="about-focus-number">02</span>
+                        <h4>Services web accessibles</h4>
+                        <p>Parcours de réservation, formulaires et espaces clients conçus pour rester clairs et utilisables sur tous les écrans.</p>
+                    </article>
+                    <article class="about-focus-item">
+                        <span class="about-focus-number">03</span>
+                        <h4>Expériences interactives</h4>
+                        <p>Applications installables, fonctionnement hors ligne et fonctionnalités en temps réel selon les besoins du projet.</p>
+                    </article>
                 </div>
             </div>
         </div>
@@ -134,32 +192,45 @@
     <section id="experience" class="section-light">
         <div class="container">
             <h2>Mon Parcours</h2>
+            <p class="timeline-intro">Depuis 2023, mon parcours se construit autour de projets concrets : des outils de gestion aux applications full-stack et aux expériences web interactives.</p>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-date">2025 - Présent</div>
-                        <h3>Développeur Full Stack Senior</h3>
-                        <p>Tech Innovation Inc.</p>
-                        <p>Développement d'applications web complexes utilisant React, Node.js et MongoDB.</p>
+                        <div class="timeline-date">Étape 01 · Depuis 2023</div>
+                        <h3>Construire des bases solides</h3>
+                        <p>Je me spécialise en PHP, mon langage de prédilection, tout en développant des interfaces avec HTML, CSS et JavaScript. Mes réalisations couvrent la structure d'un site, son interface et le traitement des données.</p>
+                        <ul class="timeline-points">
+                            <li>Développement de sites et d'applications web.</li>
+                            <li>Conception de bases de données relationnelles avec MySQL.</li>
+                        </ul>
+                        <div class="timeline-tags"><span>PHP</span><span>MySQL</span><span>JavaScript</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-date">2024 - 2025</div>
-                        <h3>Développeur Front-End</h3>
-                        <p>Digital Solutions Ltd.</p>
-                        <p>Création d'interfaces utilisateur réactives et accessibles avec Vue.js et TypeScript.</p>
+                        <div class="timeline-date">Étape 02 · Applications full-stack</div>
+                        <h3>Répondre à des besoins métier</h3>
+                        <p>Je conçois des applications qui relient interface, logique serveur et base de données. Les projets présentés incluent la gestion de dons et de finances, la prise de rendez-vous, le suivi de réparations et les tontines.</p>
+                        <ul class="timeline-points">
+                            <li>Tableaux de bord, suivi des opérations et gestion des rôles.</li>
+                            <li>Authentification, sécurisation des données et génération de reçus PDF.</li>
+                        </ul>
+                        <div class="timeline-tags"><span>PHP</span><span>React</span><span>Node.js</span><span>SQL</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-date">2023 - 2024</div>
-                        <h3>Développeur Web Junior</h3>
-                        <p>StartUp Innovate</p>
-                        <p>Développement de sites web et maintenance de projets existants.</p>
+                        <div class="timeline-date">Étape 03 · Expériences interactives</div>
+                        <h3>Explorer de nouveaux usages</h3>
+                        <p>Je développe aussi des expériences web installables et interactives, comme des applications utilisables hors ligne, des fonctionnalités en temps réel ou un apprentissage de la prononciation assisté par la caméra.</p>
+                        <ul class="timeline-points">
+                            <li>Applications PWA et fonctionnement hors ligne.</li>
+                            <li>Temps réel avec WebSockets et reconnaissance d'objets avec TensorFlow.js et MediaPipe.</li>
+                        </ul>
+                        <div class="timeline-tags"><span>PWA</span><span>Socket.IO</span><span>TensorFlow.js</span><span>MediaPipe</span></div>
                     </div>
                 </div>
             </div>
@@ -170,8 +241,10 @@
     <section id="contact" class="section-dark">
         <div class="container">
             <h2>Me Contacter</h2>
+            <p class="contact-intro">Une idée à concrétiser, un projet web ou un besoin spécifique ? Contactez-moi pour donner vie à vos idées et construire une solution adaptée à vos objectifs.</p>
             <div class="contact-grid">
                 <div class="contact-info">
+                    <p class="availability"><span class="availability-dot"></span>Disponible 24h/24 et 7j/7</p>
                     <div class="contact-item">
                         <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
                         <div>
@@ -194,6 +267,8 @@
                         </div>
                     </div>
                     <div class="social-links">
+                        <a href="https://github.com/Thibaut-Acakpo" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.418-1.305.762-1.605-2.665-.303-5.466-1.334-5.466-5.931 0-1.31.468-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6.004 0c2.291-1.552 3.297-1.23 3.297-1.23.655 1.652.243 2.873.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.805 5.625-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z"/></svg></a>
+                        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.123 2.062 2.062 0 0 1 0 4.123zM3.56 9h3.56v11.452H3.56V9zm17.1-9H3.337C1.502 0 0 1.503 0 3.337v17.326C0 22.497 1.502 24 3.337 24h17.326C22.498 24 24 22.497 24 20.663V3.337C24 1.503 20.663 0 20.447 0z"/></svg></a>
                         <a href="https://www.facebook.com/thibaut.acakpo" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" loading="lazy"></a>
                         <a href="https://wa.me/22999911438" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp"><img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="WhatsApp" loading="lazy"></a>
                         <a href="https://www.instagram.com/thibaut.acakpo?igsh=MXV5NGV3dzB5c28ydQ==" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" loading="lazy"></a>
@@ -201,7 +276,8 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <!-- ⚠️ MODIFICATION ICI : Ajout des attributs "name" -->
+                    <h3 class="contact-form-title">Parlons de votre projet</h3>
+                    <p class="contact-form-intro">Présentez-moi votre besoin en quelques lignes.</p>
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="name">Nom complet</label>
@@ -246,6 +322,8 @@
             <div class="footer-social">
                 <h4>Réseaux</h4>
                 <div class="footer-social-links">
+                    <a href="https://github.com/Thibaut-Acakpo" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.776.418-1.305.762-1.605-2.665-.303-5.466-1.334-5.466-5.931 0-1.31.468-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6.004 0c2.291-1.552 3.297-1.23 3.297-1.23.655 1.652.243 2.873.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.805 5.625-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.123 2.062 2.062 0 0 1 0 4.123zM3.56 9h3.56v11.452H3.56V9zm17.1-9H3.337C1.502 0 0 1.503 0 3.337v17.326C0 22.497 1.502 24 3.337 24h17.326C22.498 24 24 22.497 24 20.663V3.337C22.498 1.503 20.663 0 20.447 0z"/></svg></a>
                     <a href="https://www.facebook.com/thibaut.acakpo" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" loading="lazy"></a>
                     <a href="https://wa.me/22999911438" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="WhatsApp" loading="lazy"></a>
                     <a href="https://www.instagram.com/thibaut.acakpo?igsh=MXV5NGV3dzB5c28ydQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" loading="lazy"></a>
@@ -263,7 +341,7 @@
     <!-- Scroll to Top -->
     <div class="scroll-top" id="scrollTop">↑</div>
 
-    <!-- ⚠️ AJOUT ICI : Modal de succès -->
+    <!-- Modal de succès -->
     <div class="success-modal-overlay" id="successModal">
         <div class="success-modal">
             <div class="success-icon">
