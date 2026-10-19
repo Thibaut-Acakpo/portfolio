@@ -1810,7 +1810,6 @@ footer {
     .modal-image img {
         max-height: 300px;
     }
-}
 
 @media (max-width: 480px) {
     #hero {
