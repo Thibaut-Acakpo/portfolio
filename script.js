@@ -631,3 +631,42 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// ========== BOUTON D'INSTALLATION PWA ==========
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Empêche l'affichage de la bannière par défaut du navigateur
+    e.preventDefault();
+    // Sauvegarde l'événement pour le déclencher plus tard
+    deferredPrompt = e;
+    
+    // Affiche notre joli bouton personnalisé
+    const installBtn = document.getElementById('installPwaBtn');
+    if (installBtn) {
+        installBtn.style.display = 'flex';
+    }
+});
+
+// Quand on clique sur notre bouton
+document.getElementById('installPwaBtn')?.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    
+    // Affiche la fenêtre d'installation native
+    deferredPrompt.prompt();
+    
+    // Attend la réponse de l'utilisateur
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`L'utilisateur a choisi : ${outcome}`);
+    
+    // On cache le bouton une fois l'installation faite (ou annulée)
+    deferredPrompt = null;
+    document.getElementById('installPwaBtn').style.display = 'none';
+});
+
+// Cacher le bouton si l'application est déjà installée
+window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    document.getElementById('installPwaBtn').style.display = 'none';
+    console.log('PWA installée avec succès !');
+});
