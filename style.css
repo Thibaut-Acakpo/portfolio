@@ -1684,17 +1684,14 @@ footer {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh; /* Prend toute la hauteur de l'écran */
+        height: 100vh;
         background: rgba(26, 26, 46, 0.98);
         backdrop-filter: blur(10px);
-        
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 2rem; /* Espace entre chaque lien */
-        
-        /* Animation d'apparition (glissement depuis la droite) */
+        gap: 2rem;
         transform: translateX(100%);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: 1000;
@@ -1705,7 +1702,7 @@ footer {
     }
 
     nav a {
-        font-size: 1.5rem; /* Liens plus grands sur mobile */
+        font-size: 1.5rem;
         font-weight: 600;
         padding: 0.5rem 1rem;
         color: rgba(255, 255, 255, 0.8);
@@ -1718,7 +1715,7 @@ footer {
     }
 
     nav a::after {
-        display: none; /* Supprime le soulignement sur mobile */
+        display: none;
     }
     /* ------------------------------------ */
 
@@ -1755,9 +1752,8 @@ footer {
         max-width: 100%;
         height: auto;
     }
-}
 
-
+    /* --- CORRECTION : CES REGLES DOIVENT ETRE DANS LE @media --- */
     .container {
         padding: 10px;
     }
@@ -1767,7 +1763,7 @@ footer {
     }
 
     .footer-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Empile sur mobile */
         gap: 2rem;
         text-align: center;
     }
@@ -1815,10 +1811,11 @@ footer {
     .modal-image img {
         max-height: 300px;
     }
+} /* <--- ACCCOLADE FERMANTE IMPORTANTE ICI */
 
 @media (max-width: 480px) {
     #hero {
-        padding: 5rem 1.25rem 2rem; /* Réduit l'espace en haut et en bas */
+        padding: 5rem 1.25rem 2rem; 
     }
     
     .hero-name {
@@ -1837,7 +1834,7 @@ footer {
     }
     
     .hero-stack {
-        margin-bottom: 1.5rem; /* Rapproche les badges des boutons */
+        margin-bottom: 1.5rem; 
     }
     
     .hero-buttons {
@@ -1867,14 +1864,13 @@ footer {
         font-size: 0.85rem;
     }
 
-    /* --- NOUVEAU : Ajustements pour la section Contact sur mobile --- */
     .contact-item {
-        padding: 1rem; /* Moins de marge interne */
-        gap: 0.8rem;   /* Moins d'espace entre l'icône et le texte */
+        padding: 1rem; 
+        gap: 0.8rem;   
     }
 
     .contact-icon {
-        width: 45px;   /* Icône un peu plus petite */
+        width: 45px;   
         height: 45px;
     }
 
@@ -1884,13 +1880,12 @@ footer {
     }
 
     .contact-item p {
-        font-size: 0.85rem; /* Texte légèrement plus petit pour tout faire rentrer */
+        font-size: 0.85rem; 
     }
 
     .contact-form {
-        padding: 1.5rem; /* Réduit la marge interne du formulaire */
+        padding: 1.5rem; 
     }
-    /* ------------------------------------------------------------- */
 
     html, body {
         max-width: 100%;
@@ -1898,8 +1893,9 @@ footer {
     }
 }
 
+/* Titre de contact */
 .contact-item h3 {
-    color: var(--primary); /* Change la couleur du titre (bleu/violet) */
-    font-size: 1.1rem;     /* Ajuste légèrement la taille si besoin */
+    color: var(--primary); 
+    font-size: 1.1rem;     
     margin-bottom: 0.2rem;
 }
