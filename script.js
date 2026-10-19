@@ -632,41 +632,38 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// ========== BOUTON D'INSTALLATION PWA ==========
+// ========== BOUTON D'INSTALLATION PWA (Infaillible) ==========
 let deferredPrompt;
+const installBtn = document.getElementById('installPwaBtn');
 
+// Détecte si on est sur iPhone/iPad
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+// Écoute l'événement d'installation (Android/Chrome)
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Empêche l'affichage de la bannière par défaut du navigateur
     e.preventDefault();
-    // Sauvegarde l'événement pour le déclencher plus tard
     deferredPrompt = e;
-    
-    // Affiche notre joli bouton personnalisé
-    const installBtn = document.getElementById('installPwaBtn');
-    if (installBtn) {
-        installBtn.style.display = 'flex';
+});
+
+// Gère le clic sur le bouton
+installBtn?.addEventListener('click', async () => {
+    if (isIOS) {
+        // Si c'est un iPhone, on affiche une alerte avec les instructions
+        alert("Pour installer l'application sur iPhone :\n\n1. Appuyez sur l'icône 'Partager' (le carré avec une flèche vers le haut) en bas de l'écran.\n2. Faites défiler et choisissez 'Sur l'écran d'accueil'.\n3. Appuyez sur 'Ajouter'.");
+    } else if (deferredPrompt) {
+        // Si c'est un Android et que l'installation est prête
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`L'utilisateur a choisi : ${outcome}`);
+        deferredPrompt = null;
+    } else {
+        // Si le navigateur ne supporte pas l'installation automatique (ex: Firefox)
+        alert("Votre navigateur ne permet pas l'installation directe. Utilisez le menu de votre navigateur et choisissez 'Installer l'application' ou 'Ajouter à l'écran d'accueil'.");
     }
 });
 
-// Quand on clique sur notre bouton
-document.getElementById('installPwaBtn')?.addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    
-    // Affiche la fenêtre d'installation native
-    deferredPrompt.prompt();
-    
-    // Attend la réponse de l'utilisateur
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`L'utilisateur a choisi : ${outcome}`);
-    
-    // On cache le bouton une fois l'installation faite (ou annulée)
-    deferredPrompt = null;
-    document.getElementById('installPwaBtn').style.display = 'none';
-});
-
-// Cacher le bouton si l'application est déjà installée
+// Cache le bouton une fois l'appli installée
 window.addEventListener('appinstalled', () => {
-    deferredPrompt = null;
-    document.getElementById('installPwaBtn').style.display = 'none';
+    installBtn.style.display = 'none';
     console.log('PWA installée avec succès !');
 });
