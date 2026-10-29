@@ -769,19 +769,6 @@ h2::after {
     transform: translateY(-4px) scale(1.15);
 }
 
-/* ✅ NOUVEAU : style du texte de remplacement pour un logo de tech introuvable */
-.project-tech-logos .tech-fallback {
-    display: inline-flex;
-    align-items: center;
-    height: 24px;
-    padding: 0 8px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.75rem;
-    line-height: 1;
-}
-
 .project-overlay {
     position: absolute;
     bottom: 0;
@@ -1549,171 +1536,6 @@ footer {
 }
 
 /* ============================================
-   SECTION COMPÉTENCES (DESIGN OPTION 2)
-   ============================================ */
-#skills .container {
-    max-width: 1000px;
-}
-
-#skills .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Une seule colonne */
-    gap: 16px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-#skills .skill-category {
-    position: relative;
-    display: block;
-    padding: 20px 22px;
-    background: linear-gradient(145deg, #ffffff 0%, #fbfaff 100%);
-    border: 1px solid #e8e7f5;
-    border-radius: 18px;
-    box-shadow: 0 5px 18px rgba(42, 49, 91, 0.055);
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity .35s ease, transform .35s ease, box-shadow .25s ease;
-    transition-delay: calc(var(--skill-card-index, 0) * 35ms);
-}
-
-#skills .skill-category.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-#skills .skill-category:hover {
-    box-shadow: 0 10px 26px rgba(42, 49, 91, 0.09);
-}
-
-#skills .skill-category-header {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    margin-bottom: 16px;
-}
-
-#skills .skill-category-icon {
-    flex: 0 0 44px;
-    width: 44px;
-    height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #5b4de2;
-    background: linear-gradient(145deg, #efedff, #e3e7ff);
-    border-radius: 14px;
-}
-
-#skills .skill-category-icon svg {
-    width: 23px;
-    height: 23px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-#skills .skill-category-heading {
-    min-width: 0;
-}
-
-#skills .skill-category-title {
-    margin: 0 0 4px;
-    color: #172448;
-    font-size: 1.1rem;
-    font-weight: 750;
-    line-height: 1.35;
-}
-
-#skills .skill-category-description {
-    margin: 0;
-    color: #77809a;
-    font-size: 0.82rem;
-    line-height: 1.45;
-}
-
-#skills .skill-badges {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-}
-
-#skills .skill-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    max-width: 100%;
-    min-height: 42px;
-    padding: 9px 13px;
-    color: #34405e;
-    background: #f4f6fc;
-    border: 1px solid #edf0fa;
-    border-radius: 12px;
-    font-size: 0.96rem;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-    transition: background .2s ease, border-color .2s ease, transform .2s ease;
-}
-
-#skills .skill-badge:hover {
-    background: #efedff;
-    border-color: #ded9ff;
-    transform: translateY(-2px);
-}
-
-#skills .skill-badge.mastered {
-    color: #303c60;
-}
-
-#skills .skill-badge.notions {
-    color: #59637a;
-    background: #fafbfe;
-    border-color: #e9edf5;
-}
-
-#skills .skill-badge-logo {
-    flex: 0 0 22px;
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-}
-
-#skills .skill-badge-fallback {
-    display: inline-flex;
-    flex: 0 0 22px;
-    width: 22px;
-    height: 22px;
-    align-items: center;
-    justify-content: center;
-    color: #6556d9;
-}
-
-#skills .skill-badge-fallback svg {
-    display: block;
-    width: 22px;
-    height: 22px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-#skills .skill-group-title {
-    margin: 18px 0 9px;
-    color: #343d61;
-    font-size: .9rem;
-    font-weight: 700;
-}
-
-#skills .skill-group-title:first-of-type {
-    margin-top: 4px;
-}
-
-/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 992px) {
@@ -1787,17 +1609,6 @@ footer {
     .success-icon { width: 80px; height: 80px; }
     .modal-image { max-height: 300px; }
     .modal-image img { max-height: 300px; }
-
-    /* Compétences Mobile */
-    #skills .skills-grid { gap: 12px; }
-    #skills .skill-category { padding: 16px; border-radius: 15px; }
-    #skills .skill-category-header { gap: 10px; margin-bottom: 13px; }
-    #skills .skill-category-icon { flex-basis: 40px; width: 40px; height: 40px; border-radius: 12px; }
-    #skills .skill-category-title { font-size: 1rem; }
-    #skills .skill-category-description { font-size: .78rem; }
-    #skills .skill-badges { gap: 7px; }
-    #skills .skill-badge { min-height: 39px; padding: 8px 11px; gap: 8px; font-size: 0.9rem; border-radius: 10px; }
-    #skills .skill-badge-logo, #skills .skill-badge-fallback { flex-basis: 20px; width: 20px; height: 20px; }
 }
 
 @media (max-width: 480px) {
@@ -1818,4 +1629,157 @@ footer {
     .contact-item p { font-size: 0.85rem; }
     .contact-form { padding: 1.5rem; }
     html, body { max-width: 100%; overflow-x: hidden; }
+}
+
+/* ============================================
+   SECTION COMPÉTENCES — DESIGN OPTION 2
+   (à coller à la FIN de style.css)
+   ============================================ */
+#skills .container { max-width: 1000px; }
+
+#skills .skills-legend {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin: 0 auto 22px;
+    color: #59637a;
+    font-size: 0.85rem;
+}
+#skills .skills-legend span { display: inline-flex; align-items: center; gap: 8px; }
+#skills .legend-dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    border: 2px solid #5b4de2; display: inline-block;
+}
+#skills .legend-dot.mastered { background: #5b4de2; }
+#skills .legend-dot.notions { background: transparent; }
+
+#skills .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --- Carte de catégorie --- */
+#skills .skill-category {
+    position: relative;
+    display: block;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e8e7f5;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(42, 49, 91, 0.055);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .35s ease, transform .35s ease, box-shadow .25s ease;
+    transition-delay: calc(var(--skill-card-index, 0) * 35ms);
+}
+#skills .skill-category.visible { opacity: 1; transform: translateY(0); }
+#skills .skill-category:hover { box-shadow: 0 10px 26px rgba(42, 49, 91, 0.09); }
+
+#skills .skill-category-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+}
+#skills .skill-category-icon {
+    flex: 0 0 46px; width: 46px; height: 46px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #5b4de2;
+    background: linear-gradient(145deg, #efedff, #e3e7ff);
+    border-radius: 14px;
+}
+#skills .skill-category-icon svg {
+    width: 24px; height: 24px;
+    fill: none; stroke: currentColor; stroke-width: 1.8;
+    stroke-linecap: round; stroke-linejoin: round;
+}
+#skills .skill-category-heading { min-width: 0; }
+#skills .skill-category-title {
+    margin: 0 0 3px; color: #172448;
+    font-size: 1.1rem; font-weight: 700; line-height: 1.3;
+}
+#skills .skill-category-description {
+    margin: 0; color: #77809a; font-size: 0.82rem; line-height: 1.45;
+}
+
+/* --- Tuiles : une compétence = une tuile --- */
+#skills .skill-badges {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 10px;
+}
+#skills .skill-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 10px 14px;
+    color: #303c60;
+    background: #f4f6fc;
+    border: 1px solid #e9edf8;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+#skills .skill-badge:hover {
+    background: #efedff;
+    border-color: #d6d0ff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(91, 77, 226, 0.12);
+}
+#skills .skill-badge.notions {
+    background: #fafbfe;
+    border: 1px dashed #d9dfee;
+    color: #59637a;
+    font-weight: 500;
+}
+#skills .skill-badge-label { min-width: 0; overflow-wrap: anywhere; }
+
+#skills .skill-badge-logo {
+    flex: 0 0 24px; width: 24px; height: 24px; object-fit: contain;
+}
+#skills .skill-badge-logo--auto {
+    width: auto; max-width: 84px; height: 24px; flex: 0 0 auto;
+}
+
+#skills .skill-badge-brand {
+    flex: 0 0 24px; width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+}
+#skills .skill-badge-brand svg { display: block; width: 24px; height: 24px; }
+
+#skills .skill-badge-fallback {
+    flex: 0 0 24px; width: 24px; height: 24px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #6556d9;
+}
+#skills .skill-badge-fallback svg {
+    display: block; width: 22px; height: 22px;
+    fill: none; stroke: currentColor; stroke-width: 1.8;
+    stroke-linecap: round; stroke-linejoin: round;
+}
+
+#skills .skill-group-title {
+    margin: 20px 0 10px; color: #343d61; font-size: .9rem; font-weight: 700;
+}
+#skills .skill-group-title:first-of-type { margin-top: 4px; }
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+    #skills .skill-category { padding: 16px; border-radius: 15px; }
+    #skills .skill-category-header { gap: 10px; margin-bottom: 14px; }
+    #skills .skill-category-icon { flex-basis: 40px; width: 40px; height: 40px; border-radius: 12px; }
+    #skills .skill-category-icon svg { width: 21px; height: 21px; }
+    #skills .skill-category-title { font-size: 1rem; }
+    #skills .skill-category-description { font-size: .78rem; }
+    #skills .skill-badges { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    #skills .skill-badge { min-height: 46px; padding: 8px 10px; gap: 8px; font-size: 0.82rem; border-radius: 10px; }
+    #skills .skill-badge-logo,
+    #skills .skill-badge-brand,
+    #skills .skill-badge-fallback { flex-basis: 20px; width: 20px; height: 20px; }
+    #skills .skill-badge-brand svg { width: 20px; height: 20px; }
+    #skills .skill-badge-logo--auto { height: 20px; max-width: 72px; }
+    #skills .skill-badge-fallback svg { width: 19px; height: 19px; }
 }
