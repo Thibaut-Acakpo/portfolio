@@ -86,8 +86,27 @@ if (typewriterElement) {
 // ========== DATA PROJETS ==========
 const projects = [
     // ============================================
-    // 3 NOUVEAUX PROJETS (en premier)
+    // NOUVEAUX PROJETS (en premier)
     // ============================================
+    {
+        id: 13,
+        title: "Le Vrai Bonheur",
+        category: "web",
+        image: "images/projets/lvb.jpg",
+        description: "Site de fournitures scolaires et de bureau au Bénin, avec localisation des boutiques et contact direct.",
+        longDescription: "Site vitrine pour Le Vrai Bonheur, qui propose des fournitures scolaires, du matériel de bureau et des produits informatiques à prix accessibles dans ses boutiques au Bénin. L'interface responsive présente l'offre et les boutiques, avec leur localisation sur Google Maps et un contact direct via WhatsApp. Réalisé avec HTML5, CSS3, JavaScript, React 18 et Tailwind CSS 3.4, le projet utilise également HTM pour écrire les composants, des SVG et les polices Figtree et Fraunces.",
+        tags: [
+            { name: "HTML5", slug: "html5" },
+            { name: "CSS3", slug: "css" },
+            { name: "JavaScript", slug: "javascript" },
+            { name: "React", slug: "react" },
+            { name: "Tailwind CSS", slug: "tailwindcss" },
+            { name: "Responsive Design", slug: null },
+            { name: "Google Maps", slug: "googlemaps" },
+            { name: "WhatsApp API", slug: "whatsapp" }
+        ],
+        link: "https://thibaut-acakpo.github.io/lvb/"
+    },
     {
         id: 9,
         title: "PrononciA+",
@@ -119,7 +138,7 @@ const projects = [
             { name: "PostgreSQL", slug: "postgresql" },
             { name: "Vite", slug: "vite" }
         ],
-        link: "https://atelier-reparation.onrender.com"
+        link: "https://atelier-reparation.onrender.com/s/atelier-reparation"
     },
     {
         id: 11,
@@ -221,18 +240,23 @@ const projects = [
     },
     {
         id: 5,
-        title: "RestoRésa",
+        title: "RestoreSa",
         category: "web",
-        icon: "coffee",
-        description: "Système de commande en ligne et réservation de tables pour restaurants.",
-        longDescription: "Solution pensée pour les restaurants indépendants : menu en ligne, commande à emporter, réservation de table avec plan de salle, back-office PHP pour gérer les plats et les créneaux. Base de données MySQL relationnelle.",
+        image: "images/projets/restoresa.jpg",
+        description: "Plateforme de réservation de tables et de commande à emporter pour restaurant.",
+        longDescription: "Plateforme web permettant aux clients de réserver une table ou de commander à emporter. Le front-end responsive est développé en HTML5, CSS3 et JavaScript natif ; la Fetch API échange des données JSON avec un back-end PHP natif. PDO relie l'application à une base de données MySQL. Le projet utilise également Google Fonts (Fraunces et Manrope).",
         tags: [
-            { name: "PHP", slug: "php" },
+            { name: "HTML5", slug: "html5" },
+            { name: "CSS3", slug: "css" },
             { name: "JavaScript", slug: "javascript" },
+            { name: "PHP", slug: "php" },
             { name: "MySQL", slug: "mysql" },
-            { name: "HTML5", slug: "html5" }
+            { name: "SQL", slug: null },
+            { name: "PDO", slug: null },
+            { name: "Fetch API", slug: null },
+            { name: "Responsive Design", slug: null }
         ],
-        link: "#"
+        link: "https://restoresa.freedev.app/"
     },
     {
         id: 6,
