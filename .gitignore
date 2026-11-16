@@ -1,0 +1,12 @@
+# Dépendances (régénérées avec npm install, ne doivent jamais être versionnées)
+node_modules/
+backend/node_modules/
+
+# Environnements virtuels / variables sensibles
+.venv/
+.env
+backend/.env
+
+# Fichiers système
+.DS_Store
+Thumbs.db
