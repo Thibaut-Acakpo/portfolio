@@ -220,7 +220,7 @@ const projects = [
             { name: "JavaScript", slug: "javascript" },
             { name: "Bootstrap", slug: "bootstrap" }
         ],
-        link: "https://medirdv.freedev.app/public/"
+        link: "https://medirdv.freedev.app"
     },
     {
         id: 4,
